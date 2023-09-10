@@ -1,0 +1,1 @@
+{"ad_Headline":"Test Ad: Create Template","ad_Description":"Install Flood-It App for free! Free popular Casual Game","ad_IconUrl":"https://ibb.co/yYd0XJS","ad_maxStarRaing":7,"ad_givenStarRaing":0,"ad_priceValue":0.0,"ad_AppUrl":"https://www.google.com/"}

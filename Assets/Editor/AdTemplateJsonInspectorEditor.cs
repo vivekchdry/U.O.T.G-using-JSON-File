@@ -63,6 +63,14 @@ public class AdTemplateJsonInspectorEditor : Editor
             messageForUser = string.Empty;
             templateInspector.messageForUser = string.Empty;
         }
+        GUILayout.Space(10);
+        if (GUILayout.Button("Create UI Template In Scene"))
+        {
+            Debug.Log("Create UI Template In Scene");
+            templateInspector.CreateUiTemplateInScene();
+            messageForUser = string.Empty;
+            templateInspector.messageForUser = string.Empty;
+        }
         GUILayout.Space(20);
 
         GUILayout.Label(messageForUser, UserWarning);

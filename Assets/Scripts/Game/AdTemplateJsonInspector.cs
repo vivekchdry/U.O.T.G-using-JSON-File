@@ -6,6 +6,8 @@ using System.IO;
 using UnityEngine.UIElements;
 using System.ComponentModel;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 
 public class AdTemplateJsonInspector : MonoBehaviour
@@ -16,7 +18,6 @@ public class AdTemplateJsonInspector : MonoBehaviour
     public AdJsonData adJsonData;
 
     public AdPriceType adPriceType;// { get; set; }
-
 
     public bool isDataLoaded { get; set; }
     public string messageForUser { get; set; }
@@ -189,6 +190,50 @@ public class AdTemplateJsonInspector : MonoBehaviour
             }
         }
     }
+
+    public void CreateUiTemplateInScene()
+    {
+        List<TextAsset> allTextAssets = Resources.LoadAll<TextAsset>("JSONTemplates").ToList();
+        if (allTextAssets.Count >= 1)
+        {
+            Canvas canvasComponent = CreateCanvsParent();
+
+        }
+        else
+        {
+            messageForUser = $"No JSONTemplates found.\nPlease create a new JSON Template\nusing TemplateCreator.";
+        }
+    }
+
+    public Canvas CreateCanvsParent()
+    {
+        GameObject existingCanvas = GameObject.Find("Canvas");
+        if (existingCanvas == null)
+        {
+            //string canvasPath = $"{Path.Combine(Application.dataPath, "Resources", "Prefabs", "Canvas")}";
+
+            GameObject templateParentCanvas = Resources.Load<GameObject>("Canvas");
+            if (templateParentCanvas != null)
+            {
+                GameObject canvasInstance = Instantiate(templateParentCanvas);
+                canvasInstance.gameObject.name = "Canvas";
+                Canvas canvasComponent = canvasInstance.GetComponent<Canvas>();
+                canvasComponent.worldCamera = Camera.main;
+                return canvasComponent;
+            }
+            else
+            {
+                Debug.LogError("Canvas prefab not found in Resources folder.");
+                return null;
+            }
+        }
+        else
+        {
+            Debug.Log("Canvas Already Exists In The Scene");
+            return existingCanvas.GetComponent<Canvas>();
+        }
+    }
+
     public enum AdPriceType
     {
         None,
