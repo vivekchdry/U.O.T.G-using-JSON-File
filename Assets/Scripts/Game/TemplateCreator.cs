@@ -37,12 +37,12 @@ public class TemplateCreator : MonoBehaviour
             messageForUser = $"ad_AppUrl field cannot be Empty.\nCheck the data entered.";
             return false;
         }
-        if (adJsonData.ad_maxStarRaing >= 11 || adJsonData.ad_maxStarRaing <= 4)
+        if (adJsonData.ad_maxStarRating >= 11 || adJsonData.ad_maxStarRating <= 4)
         {
             messageForUser = $"ad_maxStarRaing is invalid.\nCheck the data entered.";
             return false;
         }
-        if (adJsonData.ad_givenStarRaing >= (adJsonData.ad_maxStarRaing + 1) || adJsonData.ad_givenStarRaing <= -1)
+        if (adJsonData.ad_givenStarRating >= (adJsonData.ad_maxStarRating + 1) || adJsonData.ad_givenStarRating <= -1)
         {
             messageForUser = $"ad_givenStarRaing is invalid.\nCheck the data entered.";
             return false;
@@ -122,6 +122,12 @@ public class TemplateCreator : MonoBehaviour
     {
         fileNameWillBe = string.Empty;
         allTextAssets.Clear();
-        adJsonData.ClearFields();
+        this.adJsonData.ad_Headline = string.Empty;
+        this.adJsonData.ad_Description = string.Empty;
+        this.adJsonData.ad_IconUrl = string.Empty;
+        this.adJsonData.ad_AppUrl = string.Empty;
+        this.adJsonData.ad_maxStarRating = Mathf.Min(5, 10);
+        this.adJsonData.ad_givenStarRating = Mathf.Abs(0);
+        this.adJsonData.ad_priceValue = Mathf.Abs(0);
     }
 }

@@ -8,16 +8,17 @@ using System.ComponentModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CommonCodedTools;
 
 
-public class AdTemplateJsonInspector : MonoBehaviour
+public partial class AdTemplateJsonInspector : MonoBehaviour
 {
 
     public TextAsset adTemplateJsonAsset;
     [Space(5)]
     public AdJsonData adJsonData;
 
-    public AdPriceType adPriceType;// { get; set; }
+    public AdPriceType adPriceType { get; set; }
 
     public bool isDataLoaded { get; set; }
     public string messageForUser { get; set; }
@@ -27,7 +28,15 @@ public class AdTemplateJsonInspector : MonoBehaviour
     {
         if (adTemplateJsonAsset == null)
         {
-            adTemplateJsonAsset = Resources.Load<TextAsset>($"{Path.Combine("JSONTemplates", "JsonAssets_AdTemplate 1")}");
+            try
+            {
+                adTemplateJsonAsset = Resources.Load<TextAsset>($"{Path.Combine("JSONTemplates", "JsonAssets_AdTemplate 1")}");
+            }
+            catch (NullReferenceException exception)
+            {
+                messageForUser = $"No JSONTemplates found.\nPlease create a new JSON Template\nusing TemplateCreator.";
+                Debug.LogError(exception.Message);
+            }
         }
 
         adJsonData = JsonConvert.DeserializeObject<AdJsonData>(adTemplateJsonAsset.text);
@@ -39,7 +48,13 @@ public class AdTemplateJsonInspector : MonoBehaviour
     public bool ClearData()
     {
         isDataLoaded = false;
-        adJsonData.ClearFields();
+        this.adJsonData.ad_Headline = string.Empty;
+        this.adJsonData.ad_Description = string.Empty;
+        this.adJsonData.ad_IconUrl = string.Empty;
+        this.adJsonData.ad_AppUrl = string.Empty;
+        this.adJsonData.ad_maxStarRating = Mathf.Min(5, 10);
+        this.adJsonData.ad_givenStarRating = Mathf.Abs(0);
+        this.adJsonData.ad_priceValue = Mathf.Abs(0);
         adTemplateJsonAsset = null;
         adPriceType = AdPriceType.None;
         return isDataLoaded;
@@ -67,12 +82,12 @@ public class AdTemplateJsonInspector : MonoBehaviour
             messageForUser = $"ad_AppUrl field cannot be Empty.\nCheck JSON File.";
             return false;
         }
-        if (ref_adJsonData.ad_maxStarRaing >= 11 || ref_adJsonData.ad_maxStarRaing <= 4)
+        if (ref_adJsonData.ad_maxStarRating >= 11 || ref_adJsonData.ad_maxStarRating <= 4)
         {
             messageForUser = $"ad_maxStarRaing is invalid.\nCheck JSON File.";
             return false;
         }
-        if (ref_adJsonData.ad_givenStarRaing >= (ref_adJsonData.ad_maxStarRaing + 1) || ref_adJsonData.ad_givenStarRaing <= -1)
+        if (ref_adJsonData.ad_givenStarRating >= (ref_adJsonData.ad_maxStarRating + 1) || ref_adJsonData.ad_givenStarRating <= -1)
         {
             messageForUser = $"ad_givenStarRaing is invalid.\nCheck JSON File.";
             return false;
@@ -119,12 +134,12 @@ public class AdTemplateJsonInspector : MonoBehaviour
             messageForUser = $"ad_AppUrl field cannot be Empty.\nCheck the data entered.";
             return false;
         }
-        if (ref_adJsonData.ad_maxStarRaing >= 11 || ref_adJsonData.ad_maxStarRaing <= 4)
+        if (ref_adJsonData.ad_maxStarRating >= 11 || ref_adJsonData.ad_maxStarRating <= 4)
         {
             messageForUser = $"ad_maxStarRaing is invalid.\nCheck the data entered.";
             return false;
         }
-        if (ref_adJsonData.ad_givenStarRaing >= (ref_adJsonData.ad_maxStarRaing + 1) || ref_adJsonData.ad_givenStarRaing <= -1)
+        if (ref_adJsonData.ad_givenStarRating >= (ref_adJsonData.ad_maxStarRating + 1) || ref_adJsonData.ad_givenStarRating <= -1)
         {
             messageForUser = $"ad_givenStarRaing is invalid.\nCheck the data entered.";
             return false;
@@ -196,12 +211,47 @@ public class AdTemplateJsonInspector : MonoBehaviour
         List<TextAsset> allTextAssets = Resources.LoadAll<TextAsset>("JSONTemplates").ToList();
         if (allTextAssets.Count >= 1)
         {
-            Canvas canvasComponent = CreateCanvsParent();
-
+            if (adTemplateJsonAsset != null)
+            {
+                if (isDataLoaded)
+                {
+                    Canvas canvasComponent = CreateCanvsParent();
+                    UiTemplateProperties uiTemplateProperties = CreateTemplateFromBase(canvasComponent);
+                    uiTemplateProperties.TransferProperties(adJsonData);
+                    uiTemplateProperties.DisplayData();
+                    //ClearData();
+                }
+                else
+                {
+                    messageForUser = $"No data found for creating template.\nLoad the JSON template.";
+                }
+            }
+            else
+            {
+                messageForUser = $"No JSON file template selected.";
+            }
         }
         else
         {
             messageForUser = $"No JSONTemplates found.\nPlease create a new JSON Template\nusing TemplateCreator.";
+        }
+    }
+
+    public UiTemplateProperties CreateTemplateFromBase(Canvas canvasComponent)
+    {
+        GameObject baseTemplate = Resources.Load<GameObject>("BaseTemplate");
+        if (baseTemplate != null)
+        {
+            GameObject baseTemplateInstance = Instantiate(baseTemplate);
+            baseTemplateInstance.gameObject.name = "Adtemplate";
+            baseTemplateInstance.transform.SetParent(canvasComponent.transform, false);
+            return baseTemplateInstance.GetComponent<UiTemplateProperties>();
+        }
+        else
+        {
+            messageForUser = "Canvas prefab not found in Resources folder.";
+            Debug.LogError(messageForUser);
+            return null;
         }
     }
 
@@ -210,7 +260,6 @@ public class AdTemplateJsonInspector : MonoBehaviour
         GameObject existingCanvas = GameObject.Find("Canvas");
         if (existingCanvas == null)
         {
-            //string canvasPath = $"{Path.Combine(Application.dataPath, "Resources", "Prefabs", "Canvas")}";
 
             GameObject templateParentCanvas = Resources.Load<GameObject>("Canvas");
             if (templateParentCanvas != null)
@@ -232,12 +281,5 @@ public class AdTemplateJsonInspector : MonoBehaviour
             Debug.Log("Canvas Already Exists In The Scene");
             return existingCanvas.GetComponent<Canvas>();
         }
-    }
-
-    public enum AdPriceType
-    {
-        None,
-        FREE,
-        PAID
     }
 }

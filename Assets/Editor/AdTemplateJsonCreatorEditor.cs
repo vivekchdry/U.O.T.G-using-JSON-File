@@ -42,7 +42,7 @@ public class AdTemplateJsonCreatorEditor : Editor
         GUILayout.Space(20);
         if (GUILayout.Button("Create New Template"))
         {
-            Debug.Log("Create New Template");
+            //Debug.Log("Create New Template");
             templateCreator.CreateNewJsonFileTemplate();
             messageForUser = templateCreator.messageForUser;
             Repaint();
@@ -50,7 +50,7 @@ public class AdTemplateJsonCreatorEditor : Editor
         GUILayout.Space(10);
         if (GUILayout.Button("Clear The Template"))
         {
-            Debug.Log("Clear The Template");
+            //Debug.Log("Clear The Template");
             templateCreator.ClearData();
             messageForUser = string.Empty;
             templateCreator.messageForUser = string.Empty;

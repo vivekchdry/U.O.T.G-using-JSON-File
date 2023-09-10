@@ -43,14 +43,14 @@ public class AdTemplateJsonInspectorEditor : Editor
         GUILayout.Space(20);
         if (GUILayout.Button("Load Json Data"))
         {
-            Debug.Log("Load Json Data");
+            //Debug.Log("Load Json Data");
             templateInspector.LoadDataFromAsset();
             messageForUser = templateInspector.messageForUser;
         }
         GUILayout.Space(10);
         if (GUILayout.Button("Save Edited Data"))
         {
-            Debug.Log("Save Edited Data");
+            //Debug.Log("Save Edited Data");
             templateInspector.SaveJsonFile();
             messageForUser = templateInspector.messageForUser;
 
@@ -58,7 +58,7 @@ public class AdTemplateJsonInspectorEditor : Editor
         GUILayout.Space(10);
         if (GUILayout.Button("Clear Loaded Data"))
         {
-            Debug.Log("Clear Loaded Data");
+            //Debug.Log("Clear Loaded Data");
             templateInspector.ClearData();
             messageForUser = string.Empty;
             templateInspector.messageForUser = string.Empty;
@@ -66,10 +66,9 @@ public class AdTemplateJsonInspectorEditor : Editor
         GUILayout.Space(10);
         if (GUILayout.Button("Create UI Template In Scene"))
         {
-            Debug.Log("Create UI Template In Scene");
+            //Debug.Log("Create UI Template In Scene");
             templateInspector.CreateUiTemplateInScene();
-            messageForUser = string.Empty;
-            templateInspector.messageForUser = string.Empty;
+            messageForUser = templateInspector.messageForUser;
         }
         GUILayout.Space(20);
 
@@ -91,8 +90,8 @@ public class AdTemplateJsonInspectorEditor : Editor
             EditorGUILayout.LabelField("ad_Headline", templateInspector.adJsonData.ad_Headline);
             EditorGUILayout.LabelField("ad_Description", templateInspector.adJsonData.ad_Description);
             EditorGUILayout.LabelField("ad_IconUrl", templateInspector.adJsonData.ad_IconUrl);
-            EditorGUILayout.LabelField("ad_maxStarRaing", templateInspector.adJsonData.ad_maxStarRaing.ToString());
-            EditorGUILayout.LabelField("ad_givenStarRaing", templateInspector.adJsonData.ad_givenStarRaing.ToString());
+            EditorGUILayout.LabelField("ad_maxStarRaing", templateInspector.adJsonData.ad_maxStarRating.ToString());
+            EditorGUILayout.LabelField("ad_givenStarRaing", templateInspector.adJsonData.ad_givenStarRating.ToString());
             EditorGUILayout.LabelField("ad_priceValue", templateInspector.adJsonData.ad_priceValue.ToString());
             EditorGUILayout.LabelField("ad_AppUrl", templateInspector.adJsonData.ad_AppUrl);
         }

@@ -157,11 +157,10 @@ MonoBehaviour:
     ad_Headline: 
     ad_Description: 
     ad_IconUrl: 
-    ad_maxStarRaing: 5
-    ad_givenStarRaing: 0
+    ad_maxStarRating: 5
+    ad_givenStarRating: 0
     ad_priceValue: 0
     ad_AppUrl: 
-  adPriceType: 0
 --- !u!4 &358160436
 Transform:
   m_ObjectHideFlags: 0
@@ -304,8 +303,8 @@ MonoBehaviour:
     ad_Headline: 
     ad_Description: 
     ad_IconUrl: 
-    ad_maxStarRaing: 5
-    ad_givenStarRaing: 0
+    ad_maxStarRating: 0
+    ad_givenStarRating: 0
     ad_priceValue: 0
     ad_AppUrl: 
 --- !u!4 &1933205086

@@ -1,1 +1,1 @@
-{"ad_Headline":"Test Ad: Flood-it!","ad_Description":"Install Flood-It App for free! Free popular Casual Game","ad_IconUrl":"https://ibb.co/yYd0XJS","ad_maxStarRaing":8,"ad_givenStarRaing":3,"ad_priceValue":0.0,"ad_AppUrl":"https://www.google.com/"}
+{"ad_Headline":"Test Ad: Flood-it!","ad_Description":"Install Flood-It App for free! Free popular Casual Game","ad_IconUrl":"https://i.postimg.cc/rFDbdgRX/pngwing-com-1.png","ad_maxStarRating":8,"ad_givenStarRating":3,"ad_priceValue":0.0,"ad_AppUrl":"https://www.google.com/"}
