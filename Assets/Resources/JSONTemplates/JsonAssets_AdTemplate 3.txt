@@ -1,0 +1,1 @@
+{"ad_Headline":"Test Ad: Template Creation 3","ad_Description":"Creating JSON template using \"TemplateCreator\" tool!!","ad_IconUrl":"https://i.postimg.cc/rFDbdgRX/pngwing-com-1.png","ad_maxStarRating":7,"ad_givenStarRating":3,"ad_priceValue":0.0,"ad_AppUrl":"https://github.com/vivekchdry/U.O.T.G-using-JSON-File"}

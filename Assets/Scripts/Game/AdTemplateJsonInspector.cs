@@ -23,7 +23,7 @@ public partial class AdTemplateJsonInspector : MonoBehaviour
     public bool isDataLoaded { get; set; }
     public string messageForUser { get; set; }
 
-    [ContextMenu("LoadDataFromAsset")]
+    // [ContextMenu("LoadDataFromAsset")]
     public void LoadDataFromAsset()
     {
         if (adTemplateJsonAsset == null)
@@ -44,7 +44,7 @@ public partial class AdTemplateJsonInspector : MonoBehaviour
         isDataLoaded = IsJsonDataValid(adJsonData) ? true : ClearData();
     }
 
-    [ContextMenu("ClearData")]
+    // [ContextMenu("ClearData")]
     public bool ClearData()
     {
         isDataLoaded = false;

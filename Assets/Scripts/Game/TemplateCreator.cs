@@ -8,9 +8,9 @@ using UnityEngine;
 
 public class TemplateCreator : MonoBehaviour
 {
-    public List<TextAsset> allTextAssets;
-    [Space(5)]
-    public string fileNameWillBe;
+    [HideInInspector] public List<TextAsset> allTextAssets;
+    //Space(5)]
+    [HideInInspector] public string fileNameWillBe;
     [Space(5)]
     public AdJsonData adJsonData;
     public string messageForUser { get; set; }
@@ -67,7 +67,7 @@ public class TemplateCreator : MonoBehaviour
         return true;
     }
 
-    [ContextMenu("LookForExistingTemplates")]
+    // [ContextMenu("LookForExistingTemplates")]
     public void LookForExistingTemplates()
     {
 
@@ -82,7 +82,7 @@ public class TemplateCreator : MonoBehaviour
         }
     }
 
-    [ContextMenu("CreateNewJsonFileTemplate")]
+    // [ContextMenu("CreateNewJsonFileTemplate")]
     public void CreateNewJsonFileTemplate()
     {
         if (IsEditedDataValid())

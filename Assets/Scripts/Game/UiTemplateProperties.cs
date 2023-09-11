@@ -47,7 +47,7 @@ public class UiTemplateProperties : MonoBehaviour
         }
     }
 
-    [ContextMenu("DisplayData")]
+    // [ContextMenu("DisplayData")]
     public void DisplayData()
     {
 

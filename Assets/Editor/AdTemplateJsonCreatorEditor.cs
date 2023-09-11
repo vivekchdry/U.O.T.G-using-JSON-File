@@ -38,23 +38,27 @@ public class AdTemplateJsonCreatorEditor : Editor
         base.OnInspectorGUI();
         GUILayout.BeginVertical();
         templateCreator = (TemplateCreator)target;
-
+        GUIStyle customButtonStyle = new GUIStyle(GUI.skin.button);
+        customButtonStyle.fontSize = 20;
+        customButtonStyle.fontStyle = FontStyle.Bold;
         GUILayout.Space(20);
-        if (GUILayout.Button("Create New Template"))
+        if (GUILayout.Button("Create New Template", customButtonStyle, GUILayout.ExpandWidth(true)))
         {
             //Debug.Log("Create New Template");
             templateCreator.CreateNewJsonFileTemplate();
             messageForUser = templateCreator.messageForUser;
             Repaint();
+            AssetDatabase.Refresh();
         }
         GUILayout.Space(10);
-        if (GUILayout.Button("Clear The Template"))
+        if (GUILayout.Button("Clear The Template", customButtonStyle, GUILayout.ExpandWidth(true)))
         {
             //Debug.Log("Clear The Template");
             templateCreator.ClearData();
             messageForUser = string.Empty;
             templateCreator.messageForUser = string.Empty;
             Repaint();
+            AssetDatabase.Refresh();
         }
         GUILayout.Space(10);
         GUILayout.EndVertical();
