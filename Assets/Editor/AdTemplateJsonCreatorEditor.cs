@@ -11,36 +11,23 @@ public class AdTemplateJsonCreatorEditor : Editor
     public TemplateCreator templateCreator;
     private string messageForUser;
 
-    private bool initDone = false;
-    public GUIStyle UserWarning;
 
-    void InitStyles()
-    {
-        initDone = true;
-        UserWarning = new GUIStyle(GUI.skin.label)
-        {
-            alignment = TextAnchor.MiddleLeft,
-            margin = new RectOffset(),
-            padding = new RectOffset(),
-            fontSize = 20,
-            fontStyle = FontStyle.Bold,
-            richText = true
-        };
-
-    }
 
     public override void OnInspectorGUI()
     {
-        if (!initDone)
-        {
-            InitStyles();
-        }
+
         base.OnInspectorGUI();
         GUILayout.BeginVertical();
         templateCreator = (TemplateCreator)target;
         GUIStyle customButtonStyle = new GUIStyle(GUI.skin.button);
         customButtonStyle.fontSize = 20;
         customButtonStyle.fontStyle = FontStyle.Bold;
+        GUIStyle customLabelStyle = new GUIStyle();
+        customLabelStyle.fontSize = 25;
+        customLabelStyle.fontStyle = FontStyle.Bold;
+        customLabelStyle.wordWrap = true;
+        customLabelStyle.normal.textColor = Color.red;
+
         GUILayout.Space(20);
         if (GUILayout.Button("Create New Template", customButtonStyle, GUILayout.ExpandWidth(true)))
         {
@@ -60,7 +47,9 @@ public class AdTemplateJsonCreatorEditor : Editor
             Repaint();
             AssetDatabase.Refresh();
         }
-        GUILayout.Space(10);
+        GUILayout.Space(15);
+        GUILayout.Label(messageForUser, customLabelStyle);
+        GUILayout.Space(20);
         GUILayout.EndVertical();
     }
 }

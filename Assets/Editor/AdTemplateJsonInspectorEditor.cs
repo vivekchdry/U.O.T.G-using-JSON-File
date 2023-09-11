@@ -12,30 +12,8 @@ public class AdTemplateJsonInspectorEditor : Editor
     public AdTemplateJsonInspector templateInspector;
     private string messageForUser;
 
-    private bool initDone = false;
-    public GUIStyle UserWarning;
-
-    void InitStyles()
-    {
-        initDone = true;
-        UserWarning = new GUIStyle(GUI.skin.label)
-        {
-            alignment = TextAnchor.MiddleLeft,
-            margin = new RectOffset(),
-            padding = new RectOffset(),
-            fontSize = 20,
-            fontStyle = FontStyle.Bold,
-            richText = true
-        };
-
-    }
-
     public override void OnInspectorGUI()
     {
-        if (!initDone)
-        {
-            InitStyles();
-        }
         base.OnInspectorGUI();
         GUILayout.BeginVertical();
         templateInspector = (AdTemplateJsonInspector)target;
@@ -75,7 +53,13 @@ public class AdTemplateJsonInspectorEditor : Editor
         }
         GUILayout.Space(20);
 
-        GUILayout.Label(messageForUser, UserWarning);
+        GUIStyle customLabelStyle = new GUIStyle();
+        customLabelStyle.fontSize = 25;
+        customLabelStyle.fontStyle = FontStyle.Bold;
+        customLabelStyle.wordWrap = true;
+        customLabelStyle.normal.textColor = Color.red;
+
+        GUILayout.Label(messageForUser, customLabelStyle);
         GUILayout.Space(10);
         ShowJsonData();
 
@@ -84,7 +68,6 @@ public class AdTemplateJsonInspectorEditor : Editor
 
     public void ShowJsonData()
     {
-        //serializedObject.Update();
 
         GUILayout.Space(20);
 
