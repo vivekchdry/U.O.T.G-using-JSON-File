@@ -5,13 +5,13 @@
 *Menu Item Utility.*
 
 ![Template Creator tool](screenshots/TemplateCreatorTool.png)
-*Template Creator Tool use.*
+*Template Creator Tool use case.*
 
 ![Template Inspector Load Data](screenshots/TemplateInspector_LoadData.png)
-*Template Inspector Load Data Tool use.*
+*Template Inspector Load Data Tool use case.*
 
 ![Template Inspector Save Edited Data](screenshots/TemplateInspector_SaveEditedData.png)
-*Template Inspector Save Edited Data Tool use.*
+*Template Inspector Save Edited Data Tool use case.*
 
 ![Template Inspector Create UI Templates using JSON](screenshots/TemplateInspector_CreateUITemplate.png)
-*Template Inspector Create UI Templates using JSON Template Tool use.*
+*Create UI Templates using JSON Template Tool use case.*
